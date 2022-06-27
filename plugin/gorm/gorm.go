@@ -23,7 +23,7 @@ func (r *RefType) String() string {
 	return r.Name
 }
 
-func GormHook(b *modelgen.ModelBuild) *modelgen.ModelBuild {
+func MutateHook(b *modelgen.ModelBuild) *modelgen.ModelBuild {
 	for _, model := range b.Models {
 		var fields []*modelgen.Field
 		for _, field := range model.Fields {
@@ -59,7 +59,7 @@ func GormHook(b *modelgen.ModelBuild) *modelgen.ModelBuild {
 	return b
 }
 
-func GormFieldHook(td *ast.Definition, fd *ast.FieldDefinition, f *modelgen.Field) (*modelgen.Field, error) {
+func FieldHook(td *ast.Definition, fd *ast.FieldDefinition, f *modelgen.Field) (*modelgen.Field, error) {
 	c := fd.Directives.ForName("gorm")
 	if c != nil {
 		tag := c.Arguments.ForName("tag")
